@@ -7,7 +7,7 @@ namespace Invest.Domain.Entities
         [Required]
         public Guid Id { get; set; }
         [Required]
-        public byte[] Image { get; set; }
+        public byte[] _Image { get; set; }
         [Required]
         public Guid StateId { get; set; }
 

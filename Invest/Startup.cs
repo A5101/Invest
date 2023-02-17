@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Config = Invest.Service.Config;
 using Invest.Service;
+using Invest.Domain.Repositories.Abstract;
+using Invest.Domain.Repositories.EntityFramework;
 
 namespace Invest
 {
@@ -21,7 +23,10 @@ namespace Invest
             // подключаем конфиг из appsettings.json
             Configuration.Bind("Project", new Config());
 
-
+            services.AddTransient<IRealAstateRepository, EFRealStateRepository> ();
+            services.AddTransient<IHistoryPriceRepository, EFHistoryPriceRepository>();
+            services.AddTransient<IImageRepository, EFImageRepository>();
+            services.AddTransient<IFavoriteRepository, EFFavoriteRepository>();
             services.AddTransient<DataManager>();
 
             //подключаем контекст БД
