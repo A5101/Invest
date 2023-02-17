@@ -12,8 +12,8 @@ namespace Invest.Domain.Entities
         public Guid Id { get; set; }
         [Required]
         public string? Address { get; set; }
-        public int Number { get; set; }
-        public int Floor { get; set; }
+        public string Number { get; set; }//Номер квартиры
+        public string Floor { get; set; }//Этаж
         [Required]
         public int Cost { get; set; }
         [Required]
@@ -34,5 +34,13 @@ namespace Invest.Domain.Entities
         public double Raiting { get; set; }
         [Required]
         public DateTime DateAdded { get; set; }
+        [Required]
+        public bool Isrepaired { get; set; }
+        [Required]
+        public string RepairedType { get; set; }
+        [Required]
+        public string Expenses { get; set; }//Расходы
+        [Required]
+        public int Income { get; set; }//Доходы
     }
 }

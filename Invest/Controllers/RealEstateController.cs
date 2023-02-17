@@ -16,5 +16,9 @@ namespace Invest.Controllers
         {
             return View();
         }
+        public IActionResult Show()
+        {
+            return View();
+        }
     }
 }

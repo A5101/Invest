@@ -23,5 +23,7 @@ namespace Invest.Models
         [DataType(DataType.Password)]
         [Display(Name = "Подтвердить пароль")]
         public string PasswordConfirm { get; set; }
+
+
     }
 }
