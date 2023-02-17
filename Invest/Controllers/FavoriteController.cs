@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Invest.Controllers
 {
-    public class HomeController : Controller
+    public class FavoriteController : Controller
     {
         private readonly DataManager dataManager;
 
-        public HomeController(DataManager dataManager)
+        public FavoriteController(DataManager dataManager)
         {
             this.dataManager = dataManager;
         }

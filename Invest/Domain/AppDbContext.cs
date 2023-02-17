@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Invest.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 
@@ -8,7 +9,12 @@ namespace Invest.Domain
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
+        public DbSet<RealEstate> RealEstates { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<HistoryPrice> HistoryPrices { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
