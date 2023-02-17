@@ -10,5 +10,15 @@ namespace Invest.Domain.Repositories.EntityFramework
         {
             this.context = context;
         }
+
+        public byte[] GetPlanImageByAstateId(Guid id)
+        {
+            return context.Images.Where(x => x.StateId == id).FirstOrDefault()._Image;
+        }
+
+        public List<byte[]> GetPlanImagesByAstateId(Guid id)
+        {
+            return context.Images.Where(x => x.StateId == id).Skip(1).Select(x => x._Image).ToList();
+        }
     }
 }

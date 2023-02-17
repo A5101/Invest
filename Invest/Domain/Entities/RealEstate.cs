@@ -1,6 +1,7 @@
 ﻿
 using Invest.Service;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Type = Invest.Service.Type;
 
 namespace Invest.Domain.Entities
@@ -12,16 +13,16 @@ namespace Invest.Domain.Entities
         public Guid Id { get; set; }
         [Required]
         public string? Address { get; set; }
-        public int Number { get; set; }
-        public int Floor { get; set; }
+        public string? Number { get; set; }//Номер квартиры
+        public string? Floor { get; set; }//Этаж
         [Required]
         public int Cost { get; set; }
         [Required]
         public double Area { get; set; }
         [Required]
-        public Usage Usage { get; set; }
+        public string Usage { get; set; }
         [Required]
-        public Type Type { get; set; }
+        public string Type { get; set; }
         [Required]
         public bool AreReady { get; set; }
         [Required]
@@ -34,5 +35,11 @@ namespace Invest.Domain.Entities
         public double Raiting { get; set; }
         [Required]
         public DateTime DateAdded { get; set; }
+        [Required]
+        public bool Isrepaired { get; set; }
+        [Required]
+        public string Expenses { get; set; }//Расходы
+        [Required]
+        public int Income { get; set; }//Доходы
     }
 }

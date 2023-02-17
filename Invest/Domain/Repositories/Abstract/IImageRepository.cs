@@ -2,5 +2,7 @@
 {
     public interface IImageRepository
     {
+        public byte[] GetPlanImageByAstateId(Guid id);
+        public List<byte[]> GetPlanImagesByAstateId(Guid id);
     }
 }

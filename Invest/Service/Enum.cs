@@ -2,15 +2,14 @@
 {
     public enum Type
     {
-        Build,
-        Land,
-        Floor,
-        None
+        Здание,
+        Участок,
+        нет
     }
     public enum Usage
     {
-        Living,
-        Commerce,
-        None
+        Жилое,
+        Коммерческое,
+        нет
     }
 }
