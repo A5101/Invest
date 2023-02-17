@@ -1,4 +1,5 @@
 ﻿using Invest.Domain;
+using Invest.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Invest.Controllers
@@ -14,7 +15,14 @@ namespace Invest.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            HomeIndexViewModel model = new HomeIndexViewModel
+            {
+                estatesCommerce = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.Commerce, Service.Type.Build, 3),
+                estatesLand = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.Commerce, Service.Type.Build, 3),
+                estatesLiving = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.None, Service.Type.Land, 3),
+                realEstates = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.None, Service.Type.Land, 5)
+            };
+            return View(model);
         }
     }
 }

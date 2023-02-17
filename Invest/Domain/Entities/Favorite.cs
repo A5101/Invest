@@ -7,7 +7,7 @@ namespace Invest.Domain.Entities
         [Required]
         public Guid UserId { get; set; }
         [Required]
-        public Guid StateIId { get; set; }
+        public Guid StateId { get; set; }
         [Required]
         public bool IsChanged { get; set; }
     }

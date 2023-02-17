@@ -4,6 +4,7 @@ using Invest.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Invest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230217154357_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,9 +105,6 @@ namespace Invest.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<double>("Raiting")
-                        .HasColumnType("float");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -149,7 +148,7 @@ namespace Invest.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "36129c3a-2048-4e39-a7be-e4bfab17da77",
+                            ConcurrencyStamp = "b3ad9079-61af-444f-b761-e8af9a175aea",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -249,11 +248,11 @@ namespace Invest.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "19a4977c-a20c-4d7f-ac3a-0c569c21bc26",
+                            ConcurrencyStamp = "f7b89cf3-8dfd-4fc2-b3b6-bc9927b2e0a6",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK4KTaJ68/wLyg0A09h2qlP6Obf6KplHFzrNXMVzJx6ehfPXHFWMwRFvDEQqXZPbYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECOyKMWBwtAirtEyyihTCzgcz6SRbwN1tg0k/JoS2aYAV3KplSSKpJvpk9XvOuw3Pg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
