@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "pSphRd9f1I41wPOHhzqvx8sULrldDcCU7W2h2e/znP0jq9uouk6NDwbLvGfr/BF79m4AZc7LnUcrc+QZew9ufA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Sasha\\source\\repos\\Invest\\Invest\\Invest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Sasha\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.11\\microsoft.netcore.app.host.win-x64.6.0.11.nupkg.sha512",
+    "C:\\Users\\Sasha\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.11\\microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512",
+    "C:\\Users\\Sasha\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.11\\microsoft.windowsdesktop.app.ref.6.0.11.nupkg.sha512",
+    "C:\\Users\\Sasha\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.11\\microsoft.netcore.app.ref.6.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}
