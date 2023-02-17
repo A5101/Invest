@@ -1,0 +1,92 @@
+﻿@using Invest.Domain.Entities
+@model IQueryable<RealEstate>
+@{
+	string strTitle = "Панель администратора";
+	ViewBag.Title = strTitle;
+}
+
+
+<div>
+	<h1>@strTitle</h1>
+	<div class="container">
+		<h2 class="text-warning">Недвижимость</h2>
+		<a asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id=""><button type="button" class="btn btn-success">Добавить недвижимость</button></a>
+		@if (Model.Any())
+		{
+			<div>
+				@foreach (RealEstate entity in Model)
+				{
+					<div class="d-flex">
+						@*<a class="m-2" asp-area="" asp-controller="Event" asp-action="Index" asp-route-id="@entity.Id">
+                            <h4>@($"{entity.Address}")</h4>
+						</a>*@
+						<h4 class="m-2">|</h4>
+						<a class="m-2" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id="@entity.Id"><h4>Редактировать</h4></a>
+						<h4 class="m-2">|</h4>
+						<form class="m-2" style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Delete" method="post">
+							<input type="hidden" name="id" value="@entity.Id">
+                            <a href="#" onclick="document.getElementById('form-@entity.Id').submit();"><h4>Удалить</h4> </a>
+						</form>
+					</div>
+				}
+			</div>
+		}
+	</div>
+</div>
+<div>
+	<form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+		<input type="submit" value="Выйти" />
+	</form>
+</div>
+
+<style>
+	a {
+		text-decoration:none !important;
+	}
+	h4:hover{
+		transition:0.3s !important;
+		color:red !important;
+	}
+</style>
+
+@*<div class="admin">
+	<h1>@strTitle</h1>
+	<div>
+		<h2>Мероприятия</h2>
+		<div class="admin_">
+			<a asp-area="Admin" asp-controller="EventItems" asp-action="Edit" asp-route-id="">Добавить мероприятие</a>
+		</div>
+
+		@if (Model.Any())
+		{
+			<div>
+				@foreach (Event entity in Model)
+				{
+					<div class="admin_cont">
+						<a asp-area="Admin" asp-controller="EventItems" asp-action="Edit" asp-route-id="@entity.Id">Редактировать</a>
+						<a>|</a>
+						<form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="EventItems" asp-action="Delete" method="post">
+							<input type="hidden" name="id" value="@entity.Id">
+							<a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить </a>
+						</form>
+						<a>|</a>
+						
+						<a asp-area="" asp-controller="Events" asp-action="Index" asp-route-id="@entity.Id">
+							@($"{entity.Title}")
+						</a>
+					</div>
+				}
+			</div>
+		}
+	</div>
+		<h2>Редактировать страницы сайта</h2>
+		<a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
+		<a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Концерты</a>
+		<a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Кино</a>
+
+	<div class="div-box">
+		<form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+			<input type="submit" value="Выйти" />
+		</form>
+	</div>
+</div>*@

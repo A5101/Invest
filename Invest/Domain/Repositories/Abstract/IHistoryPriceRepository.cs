@@ -2,5 +2,7 @@
 {
     public interface IHistoryPriceRepository
     {
+        public int[] GetHistoryPrice(Guid id);
+        public string[] GetHistoryDate(Guid id);
     }
 }

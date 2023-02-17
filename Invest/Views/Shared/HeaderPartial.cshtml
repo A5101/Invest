@@ -7,7 +7,7 @@
 @*Навигация*@
 <nav class="navbar navbar-expand-lg bg-dark" style="margin-bottom:5ex;">
     <div class="container-fluid justify-content-center">
-        <a class="navbar-brand" href="/"><h1 class="text-white">СтройИнвест23</h1></a>
+        <a class="nav-link " asp-controller="Home" asp-action="Index"> СтройИнвест23</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,29 +17,31 @@
                     <a class="nav-link active" aria-current="page" href="#"><h3 class="text-white">Здания</h3></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Account/Login"><h3 class="text-white">Участки</h3></a>
+                    <a class="nav-link" href="#"><h3 class="text-white">Участки</h3></a>
                 </li>
-                <li class="nav-item">
-                    @if (User.Identity.IsAuthenticated)
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("admin"))
                     {
-                        @if (User.IsInRole("admin"))
-                        {
+                        <li class="nav-item">
                             <a class="nav-link " asp-area="Admin" asp-controller="Home" asp-action="Index">AdminPanel</a>
-                        }
-                        else 
-                        {
-                            <a class="nav-link" href="/Account/Logout"><h3 class="text-white">@User.Identity.Name</h3></a>
-                        }
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Account" asp-action="Logout">Выйти</a>
+                        </li>
+                    } else 
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Home" asp-action="Index"> Профиль</a>
+                        </li>
                     }
-                    else
-                        {
-                            <a class="nav-link" href="/Account/Login"><h3 class="text-white">Войти</h3></a>
-                        }
-                    
 
-
+                }else
+                {
+                <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><h3 class="text-white">Войти</h3></a>
                 </li>
-                
+                }
             </ul>
 
             <form class="d-flex" role="search">
@@ -49,10 +51,3 @@
         </div>
     </div>
 </nav>
-<style>
-    .navbar-brand h1{
-        background: red;
-        padding: 5px;
-        border-radius: 16px;
-    }
-</style>

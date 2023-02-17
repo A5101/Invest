@@ -87,12 +87,25 @@ namespace Invest.Migrations
                     b.Property<int>("Cost")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Floor")
+                    b.Property<string>("Expenses")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Floor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Income")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Isrepaired")
+                        .HasColumnType("bit");
 
                     b.Property<int>("NearPlaces")
                         .HasColumnType("int");
@@ -100,8 +113,8 @@ namespace Invest.Migrations
                     b.Property<bool>("NearWorsth")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Raiting")
                         .HasColumnType("float");
@@ -149,7 +162,7 @@ namespace Invest.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "36129c3a-2048-4e39-a7be-e4bfab17da77",
+                            ConcurrencyStamp = "4c714ec2-0276-43cf-a509-8fcfa37ce47e",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -249,11 +262,11 @@ namespace Invest.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "19a4977c-a20c-4d7f-ac3a-0c569c21bc26",
-                            EmailConfirmed = false,
+                            ConcurrencyStamp = "06403a86-578a-496b-9223-e2a8ded6d74f",
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK4KTaJ68/wLyg0A09h2qlP6Obf6KplHFzrNXMVzJx6ehfPXHFWMwRFvDEQqXZPbYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHE1K6euV4V6dTn1upSmbIXBAuaTmzV4ybPxZFA/z7Gu3DQyeaUZup4SM2OBUSGNsg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

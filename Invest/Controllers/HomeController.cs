@@ -17,10 +17,10 @@ namespace Invest.Controllers
         {
             HomeIndexViewModel model = new HomeIndexViewModel
             {
-                estatesCommerce = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.Commerce, Service.Type.Build, 3),
-                estatesLand = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.Commerce, Service.Type.Build, 3),
-                estatesLiving = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.None, Service.Type.Land, 3),
-                realEstates = dataManager.RealAstates.GetRealEstatesByType(Service.Usage.None, Service.Type.Land, 5)
+                estatesCommerce = dataManager.RealAstates.GetRealEstatesByType("Коммерческое", "Здание", 3),
+                estatesLand = dataManager.RealAstates.GetRealEstatesByType(" ", "Участок", 3),
+                estatesLiving = dataManager.RealAstates.GetRealEstatesByType("Жилое", "Здание", 3),
+                realEstates = dataManager.RealAstates.GetRealEstatesByType(" ", "Участок", 5)
             };
             return View(model);
         }

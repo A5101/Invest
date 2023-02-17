@@ -47,7 +47,7 @@ namespace Invest
             //настраиваем authentication cookie
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.Name = "AfishaAuth";
+                options.Cookie.Name = "InvestAuth";
                 options.Cookie.HttpOnly = true;
                 options.LoginPath = "/account/login";
                 options.AccessDeniedPath = "/account/accessdenied";
@@ -91,7 +91,7 @@ namespace Invest
             //регистриуруем нужные нам маршруты (ендпоинты)
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=AdminHome}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
