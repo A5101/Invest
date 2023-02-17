@@ -2,9 +2,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	@await Html.PartialAsync("_Favicons")
+@*	@await Html.PartialAsync("_Favicons")
 	@await Html.PartialAsync("MetaTagsPartial")
-	@await Html.PartialAsync("CssPartial")
+	@await Html.PartialAsync("CssPartial")*@
 	
 </head>
 <body class="no-sidebar is-preload">
@@ -25,30 +25,13 @@
 				
 			</div>
 		</div>
-		<div class="modal fade id="modal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-tittle">Информация</h5>
-					</div>
-					<div class="modal-body">
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-close btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-						@if(User.IsInRole("Админ")){
-							<button type="button" class="btn btn-primary" id="saveBtn">Принять</button>
-						}
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
 	@*	@await Html.PartialAsync("FooterPartial")*@
 
 	</div>
 
-	@await Html.PartialAsync("ScriptsPartial")
+@*	@await Html.PartialAsync("ScriptsPartial")*@
 
 </body>
 </html>
