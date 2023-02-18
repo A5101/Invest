@@ -39,6 +39,7 @@ namespace Invest.Domain.Repositories.EntityFramework
         public void DeletRealAsteteItem(Guid id)
         {
             context.RealEstates.Remove(context.RealEstates.Where(x => x.Id == id).FirstOrDefault());
+            context.SaveChanges();
         }
     }
 }

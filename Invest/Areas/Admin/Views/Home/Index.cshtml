@@ -1,52 +1,55 @@
 ﻿@using Invest.Domain.Entities
 @model IQueryable<RealEstate>
 @{
-	string strTitle = "Панель администратора";
-	ViewBag.Title = strTitle;
+    string strTitle = "Панель администратора";
+    ViewBag.Title = strTitle;
 }
 
 
 <div>
-	<h1>@strTitle</h1>
-	<div class="container">
-		<h2 class="text-warning">Недвижимость</h2>
-		<a asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id=""><button type="button" class="btn btn-success">Добавить недвижимость</button></a>
-		@if (Model.Any())
-		{
-			<div>
-				@foreach (RealEstate entity in Model)
-				{
-					<div class="d-flex">
-						@*<a class="m-2" asp-area="" asp-controller="Event" asp-action="Index" asp-route-id="@entity.Id">
-                            <h4>@($"{entity.Address}")</h4>
-						</a>*@
-						<h4 class="m-2">|</h4>
-						<a class="m-2" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id="@entity.Id"><h4>Редактировать</h4></a>
-						<h4 class="m-2">|</h4>
-						<form class="m-2" style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Delete" method="post">
-							<input type="hidden" name="id" value="@entity.Id">
+    <h1>@strTitle</h1>
+    <div class="container">
+        <h2 class="text-warning">Недвижимость</h2>
+        <a asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id=""><button type="button" class="btn btn-success">Добавить недвижимость</button></a>
+        @if (Model.Any())
+        {
+            <div>
+                @foreach (RealEstate entity in Model)
+                {
+                    <div class="d-flex">
+                        <h4 class="m-2">|</h4>
+                        <a class="m-2" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id="@entity.Id"><h4>Редактировать</h4></a>
+                        <a class="m-2" asp-area="default" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.Id"><h4>Просмотр</h4></a>
+                        <form asp-area="Admin" asp-controller="RealEstatesItems" asp-action="AddImages" asp-route-id="@entity.Id" method="post" enctype="multipart/form-data">
+                            <input type="file" multiple class="m-2" name="coll" />
+                            <button type="submit" class="btn btn-primary col-xs-12">Add</button>
+                        </form>
+                        <h4 class="m-2">|</h4>
+                        <form class="m-2" style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.Id">
                             <a href="#" onclick="document.getElementById('form-@entity.Id').submit();"><h4>Удалить</h4> </a>
-						</form>
-					</div>
-				}
-			</div>
-		}
-	</div>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
 <div>
-	<form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
-		<input type="submit" value="Выйти" />
-	</form>
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+        <input type="submit" value="Выйти" />
+    </form>
 </div>
 
 <style>
-	a {
-		text-decoration:none !important;
-	}
-	h4:hover{
-		transition:0.3s !important;
-		color:red !important;
-	}
+    a {
+        text-decoration: none !important;
+    }
+
+    h4:hover {
+        transition: 0.3s !important;
+        color: red !important;
+    }
 </style>
 
 @*<div class="admin">
@@ -70,7 +73,7 @@
 							<a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить </a>
 						</form>
 						<a>|</a>
-						
+
 						<a asp-area="" asp-controller="Events" asp-action="Index" asp-route-id="@entity.Id">
 							@($"{entity.Title}")
 						</a>

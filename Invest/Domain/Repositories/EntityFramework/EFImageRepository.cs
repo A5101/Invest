@@ -1,4 +1,5 @@
-﻿using Invest.Domain.Repositories.Abstract;
+﻿using Invest.Domain.Entities;
+using Invest.Domain.Repositories.Abstract;
 
 namespace Invest.Domain.Repositories.EntityFramework
 {
@@ -19,6 +20,12 @@ namespace Invest.Domain.Repositories.EntityFramework
         public List<byte[]> GetPlanImagesByAstateId(Guid id)
         {
             return context.Images.Where(x => x.StateId == id).Skip(1).Select(x => x._Image).ToList();
+        }
+
+        public void AddImage(Image image)
+        {
+            context.Images.Add(image);
+            context.SaveChanges();
         }
     }
 }

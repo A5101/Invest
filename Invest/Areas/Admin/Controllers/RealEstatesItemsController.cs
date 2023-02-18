@@ -33,9 +33,26 @@ namespace Invest.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.RealAstates.SaveRealAstatesItem(model);
+                dataManager.HistoryPrices.AddHistory(model.Id, (int)model.Area * model.Cost, DateTime.UtcNow);
                 return base.RedirectToAction(nameof(Invest.Controllers.HomeController.Index), nameof(Invest.Controllers.HomeController).CutController());
             }
             return View(model);
+        }
+
+        public IActionResult AddImages(Guid id, IFormFileCollection coll)
+        {
+            foreach (var item in coll)
+            {
+                byte[] imageData;
+                using (var binaryReader = new BinaryReader(item.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)item.Length);
+                }
+                var im = new Image { Id = Guid.NewGuid(), StateId = id, _Image = imageData };
+                dataManager.Images.AddImage(im);
+
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
