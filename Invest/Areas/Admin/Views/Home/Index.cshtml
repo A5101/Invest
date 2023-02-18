@@ -1,4 +1,4 @@
-﻿@using Invest.Domain.Entities
+﻿entit@using Invest.Domain.Entities
 @model IQueryable<RealEstate>
 @{
     string strTitle = "Панель администратора";
@@ -17,7 +17,7 @@
                 @foreach (RealEstate entity in Model)
                 {
                     <div class="d-flex">
-                        <h4 class="m-2">|</h4>
+                        <h4 class="m-2">@System.Text.Encoding.UTF8.GetString(System.Text.Encoding.Default.GetBytes(entity.Address))</h4>
                         <a class="m-2" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id="@entity.Id"><h4>Редактировать</h4></a>
                         <a class="m-2" asp-area="default" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.Id"><h4>Просмотр</h4></a>
                         <form asp-area="Admin" asp-controller="RealEstatesItems" asp-action="AddImages" asp-route-id="@entity.Id" method="post" enctype="multipart/form-data">

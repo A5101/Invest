@@ -51,16 +51,42 @@
         @*Коммерческие здания*@
         <div class="Commercial p-4" style="background: #8080801a; border-radius: 2ex;">
             <a href="#"><h2>Жилая недвижимость »</h2></a>
+       
+        @foreach (var entity in Model.estatesLiving)
+        {
+            <div class="carousel-item active">
+                <a class="nav-link" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.RealEstate.Id">
+                    <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(entity.Image._Image)) class="d-block w-100" alt="">
+                </a>
+            </div>
+            }
         </div>
 
         @*Жилые здания*@
         <div class="Living p-4" style="background: #8080801a; border-radius: 2ex;">
             <a href="#"> <h2>Коммерческие недвижимость »</h2></a>
+            @foreach (var entity in Model.estatesCommerce)
+            {
+                <div class="carousel-item active">
+                    <a class="nav-link" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.RealEstate.Id">
+                        <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(entity.Image._Image)) class="d-block w-100" alt="">
+                    </a>
+                </div>
+            }
         </div>
+
 
         @*Жилые здания*@
         <div class="Land p-4" style="background: #8080801a; border-radius: 2ex;">
             <a href="#"><h2>Земля »</h2></a>
+            @foreach (var entity in Model.estatesLand)
+            {
+                <div class="carousel-item active">
+                    <a class="nav-link" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.RealEstate.Id">
+                        <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(entity.Image._Image)) class="d-block w-100" alt="">
+                    </a>
+                </div>
+            }
         </div>
     </div>
 
