@@ -48,7 +48,7 @@ namespace Invest.Areas.Admin.Controllers
                 {
                     imageData = binaryReader.ReadBytes((int)item.Length);
                 }
-                var im = new Image { Id = Guid.NewGuid(), StateId = id, _Image = imageData };
+                var im = new Image() { Id = Guid.NewGuid(), StateId = id, _Image = imageData };
                 dataManager.Images.AddImage(im);
 
             }

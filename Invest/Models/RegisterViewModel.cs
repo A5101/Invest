@@ -24,6 +24,8 @@ namespace Invest.Models
         [Display(Name = "Подтвердить пароль")]
         public string PasswordConfirm { get; set; }
 
+        [Display(Name = "TelegramChat")]
+        public string id { get; set; }
 
     }
 }

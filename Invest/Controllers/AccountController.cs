@@ -36,6 +36,11 @@ namespace Invest.Controllers
             {
                 var user = new IdentityUser { UserName = model.UserName, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
+                if (model.id != null)
+                {
+                    user.PhoneNumber = model.id;
+                }
+
                 if (result.Succeeded)
                 {
 
@@ -103,6 +108,11 @@ namespace Invest.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> SetChat(string Name, string id)
+        {
+            IdentityUser user = await userManager.FindByNameAsync(Name);
+            return RedirectToAction("Index", "Home");
+        }
 
         [Authorize]
         public async Task<IActionResult> Profile()

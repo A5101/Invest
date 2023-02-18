@@ -4,6 +4,7 @@ using Invest.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Invest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230218025303_init11")]
+    partial class init11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,21 +26,14 @@ namespace Invest.Migrations
 
             modelBuilder.Entity("Invest.Domain.Entities.Favorite", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsChanged")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("StateId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.ToTable("Favorites");
                 });
@@ -178,7 +173,7 @@ namespace Invest.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "9cbf8456-6359-422f-97f7-6f1dc7982c5d",
+                            ConcurrencyStamp = "e220b11f-9fee-4897-9421-01401a7018da",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -278,11 +273,11 @@ namespace Invest.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7fb0b1ed-0c4a-40bd-b19e-8e0821f74703",
+                            ConcurrencyStamp = "47ecf6cc-b1e7-4179-bf0f-cdbfed271a76",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC3Zl6qQLdOXP3N+O4ZFz/XaeEfgiUxt2tDGXQWt4+7ts5jln/w5qvPbQ2jaXsNkxA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOiaIo8a/yh21EEmCQZBqDYSoi959L7U95LbddSah0B/81H1i2kFp6c1xOEvmG/6ew==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

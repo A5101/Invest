@@ -14,7 +14,7 @@ namespace Invest.Domain.Repositories.EntityFramework
 
         public byte[] GetPlanImageByAstateId(Guid id)
         {
-            return context.Images.Where(x => x.StateId == id).FirstOrDefault()._Image;
+            return context.Images.Where(x => x.StateId == id).OrderBy(x => x.DateAdded).FirstOrDefault()._Image;
         }
 
         public List<byte[]> GetPlanImagesByAstateId(Guid id)

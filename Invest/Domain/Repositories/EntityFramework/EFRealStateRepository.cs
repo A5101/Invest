@@ -1,6 +1,8 @@
 ﻿using Invest.Domain.Entities;
 using Invest.Domain.Repositories.Abstract;
+using Invest.Models;
 using Invest.Service;
+using Microsoft.EntityFrameworkCore;
 using Type = Invest.Service.Type;
 
 namespace Invest.Domain.Repositories.EntityFramework
@@ -14,10 +16,21 @@ namespace Invest.Domain.Repositories.EntityFramework
             this.context = context;
         }
 
-        public IQueryable<RealEstate> GetRealEstatesByType(string usage, string type, int count)
+        public IEnumerable<RealEstatesWithImageViewModel> GetRealEstatesByType(string usage, string type, int count)
         {
-            if (usage == " ") return context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Type == type).Take(count);
-            return context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Usage == usage && x.Type == type).Take(count);
+            List<RealEstatesWithImageViewModel> list = new List<RealEstatesWithImageViewModel>();
+            List<RealEstate> temp;
+            if (usage == " ") 
+            {
+                temp = context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Type == type).Take(count).ToList(); 
+            } else temp = context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Usage == usage && x.Type == type).Take(count).ToList();
+            for (int i = 0; i < temp.Count; i++)
+            {
+                var t = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault();
+                if (t != default)
+                list.Add(new RealEstatesWithImageViewModel { RealEstate = temp[i], Image = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault() });
+            }
+            return list;
         }
 
         public IQueryable<RealEstate> GetRealEstates()
@@ -32,7 +45,10 @@ namespace Invest.Domain.Repositories.EntityFramework
 
         public void SaveRealAstatesItem(RealEstate realEstate)
         {
-            context.RealEstates.Add(realEstate);
+            if (realEstate.Id == default) 
+            { 
+                context.Entry(realEstate).State = EntityState.Added;
+            }else  context.Entry(realEstate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
         }
 

@@ -1,0 +1,64 @@
+﻿@model List<Invest.Domain.Entities.RealEstate>
+
+<body>
+    <div id="myMap" style="width: 500px; height: 500px;"></div>
+</body>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=7f1cbce6-29b2-4174-a184-8f037eee218a" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+
+        function init() {
+            var myMap = new ymaps.Map('myMap', {
+                center: [55.753994, 37.622093],
+                zoom: 9
+            });
+
+            var addresses = @Html.Raw(Json.Serialize(Model.Select(x => x.Address).ToList()));
+            //var links = @Html.Raw(Json.Serialize(Model.Select(x => "<a href="+ $"https://localhost:7176/Event/Show/{x.Id}"+">Посмотреть</a>").ToList()));
+            //console.log(addresses[0]);
+
+            for (let i = 0; i < addresses.length; i++) {
+                ymaps.geocode(addresses[i], {
+                    results: 10
+                }).then(function (res) {
+                    // Выбираем первый результат геокодирования.
+                    var firstGeoObject = res.geoObjects.get(0),
+                        // Координаты геообъекта.
+                        coords = firstGeoObject.geometry.getCoordinates(),
+                        // Область видимости геообъекта.
+                        bounds = firstGeoObject.properties.get('boundedBy');
+
+                    //var a = document.createElement("a");
+                    //a.href = links[i];
+                    //a.textContent(Посмотреть);
+                    //console.log(a);
+                    firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+                    // Получаем строку с адресом и выводим в иконке геообъекта.
+                    firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+                    //firstGeoObject.properties.set('balloonContentHeader', links[i]);
+                    //firstGeoObject.properties.set('balloonContentBody', images[i]);
+                    // Добавляем первый найденный геообъект на карту.
+                    myMap.geoObjects.add(firstGeoObject);
+                    // Масштабируем карту на область видимости геообъекта.
+                    myMap.setBounds(bounds, {
+                        // Проверяем наличие тайлов на данном масштабе.
+                        checkZoomRange: true
+                    });
+                });
+            }
+        }
+    </script>
+
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+</head>

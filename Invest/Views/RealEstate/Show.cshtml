@@ -1,5 +1,6 @@
 ﻿@model Invest.Models.ShowRealEstateViewModel
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/cdb.min.css" />
@@ -9,8 +10,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
 
-<div class="mb-4 p-4" style="background: #f3f3f3;border-radius:2.5ex;">
-    <div class="row" style="margin-bottom:2ex"><h1 class="mx-auto">@Model.FullAddress (@Model.RealEstate.Usage ; @Model.RealEstate.Type) </h1></div>
+<div class="mb-4 p-4" style="background: white;border-radius:2.5ex;">
+    <div class="row" style="margin-bottom:2ex">
+        <h1 class="mx-auto">@Model.FullAddress @Model.RealEstate.Usage @Model.RealEstate.Type </h1>  <form asp-controller="Favorite" asp-action="AddToFavorite" asp-route-id="@Model.RealEstate.Id" asp-route-userName="@User.Identity.Name">
+            <button type="submit"><i style="font-size:4vmin;" class="fa-regular fa-heart"></i></button>
+        </form>
+    </div>
 
     @*Слайдер изображений*@
 
@@ -27,9 +32,9 @@
                 </div>
                 @foreach (var images in Model.Images.Skip(1))
                 {
-                <div class="carousel-item">
-                    <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(images)) class="d-block w-100" alt="...">
-                </div>
+                    <div class="carousel-item">
+                        <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(images)) class="d-block w-100" alt="...">
+                    </div>
                 }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -47,58 +52,70 @@
     <div class="info mx-auto d-grid">
         <h3> Местоположение: </h3>
         @*Карта Яндекса*@
-
+        <div class="mx-auto"> @await Html.PartialAsync("Map", new List<Invest.Domain.Entities.RealEstate>{Model.RealEstate})</div>
+       
         @*Эксплуатация*@
         <div class="roomAreatext d-flex">
             <h3> Статус: </h3>
-            <h2 style="margin-left:3px;margin-top:-1px;color:red;"> Не в эксплуатации </h2>
-            !Model.RealEstate.AreReady
+
+            @if (!@Model.RealEstate.AreReady)
             {
-            <h2 style="margin-left:3px;margin-top:-1px;color:red;"> Не в эксплуатации </h2>
+                <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> Не в эксплуатации </h2>
             }
             else
             {
-            <h2 style="margin-left:3px;margin-top:-1px;color:green;"> В эксплуатации </h2>
-            Model.RealEstate.Isrepaired
-            {
-            <h2 style="margin-left:3px;margin-top:-1px;color:green;"> С готовым ремонтом </h2>
+                <h2 style="margin-left:3px;margin-top:-1px;color:green !important;"> В эксплуатации, </h2>
+                @if (Model.RealEstate.Isrepaired)
+                {
+                    <h2 style="margin-left:3px;margin-top:-1px;color:green !important;"> с готовым ремонтом </h2>
+                }
+                else
+                {
+                    <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> без ремонта </h2>
+                }
             }
-            else
-            {
-            <h2 style="margin-left:3px;margin-top:-1px;color:red;"> Без ремонта </h2>
-            }
-            }
-            }
+
         </div>
 
         @*Помещение *@
         <div class="roomArea">
             <div class="roomAreatext d-flex">
                 <h3> Площадь помещения: </h3>
-                <h2 class="text-gray" style="margin-left:3px;margin-top:-1px;color:tomato;">64.2 м²</h2>
+                <h2 class="text-gray" style="margin-left:3px;margin-top:-1px;color:tomato;">@Model.RealEstate.Area м²</h2>
             </div>
             <a href="#" data-toggle="modal" data-target="#exampleModal">
-                <img src="https://na-dache.pro/uploads/posts/2021-11/1635957455_62-na-dache-pro-p-chertezh-kvartiri-foto-73.png" class="d-block mx-auto rounded" alt="...">
+                <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(Model.Plan)) class="d-block mx-auto rounded" alt="...">
             </a>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered
-modal-lg" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body p-0">
-                        <img src="https://na-dache.pro/uploads/posts/2021-11/1635957455_62-na-dache-pro-p-chertezh-kvartiri-foto-73.png" class="d-block w-100" alt="...">
+                        <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(Model.Plan)) class="d-block w-100" alt="...">
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="roomAreatext d-flex">
-            <h3> Месячная прибыль: </h3>
-            <h2 style="margin-left:3px;margin-top:-1px;color:tomato;"> ~ 16000 ₽ @*@Model.RealEstate.Income*@ </h2>
+            <div class="d-flex">
+                <h3> Месячная прибыль: </h3>
+                <h2 style="margin-left:3px;margin-top:-1px;color:green !important;">~ @Model.RealEstate.Income ₽</h2>
+            </div>
+            <div class="d-flex" style="margin-left: 3ex;">
+                <h3> Месячные затраты:</h3>
+                <h2 style="margin-left:3px;margin-top:-1px;color:red !important;">
+                    ~ @Model.TotalExpenses ₽
+                </h2>
+            </div>
+            <div class="d-flex" style="margin-left: 3ex;">
+                <h3> Итого:</h3>
+                <h2 style="margin-left:3px;margin-top:-1px;color:#0239ff !important;"> ~ @(Model.RealEstate.Income - Model.TotalExpenses) ₽ </h2>
+            </div>
         </div>
         <div class="roomAreatext d-flex">
             <h3> Средний срок оккупаемости: </h3>
-            <h2 style="margin-left:3px;margin-top:-1px;color:tomato;"> ~ 14.5 лет @*@(Model.RealEstate.Cost*Model.RealEstate.Area/Model.RealEstate.Income)*@ </h2>
+            <h2 style="margin-left:3px;margin-top:-1px;color:tomato;"> ~ @(Model.RealEstate.Cost * Model.RealEstate.Area / Model.RealEstate.Income) месяцев </h2>
         </div>
 
 
@@ -119,16 +136,18 @@ modal-lg" role="document">
 
 
     <script>
+        var price = @Html.Raw(Json.Serialize(Model.HistoryPrice));
+        var date = @Html.Raw(Json.Serialize(Model.HistoryDate));
         const ctx = document.getElementById("chart").getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["Март", "Апрель", "Май"],
+                labels: date,
                 datasets: [{
                     label: 'Рыночная стоимость',
                     backgroundColor: 'rgba(161, 198, 247, 1)',
                     borderColor: 'rgb(47, 128, 237)',
-                    data: [1000000, 2000000, 1500000],
+                    data: price,
                 }]
             },
             options: {
@@ -145,6 +164,11 @@ modal-lg" role="document">
     </script>
 
     <style>
+
+        .roomAreatext {
+            margin-top: 4ex !important;
+        }
+
         h2 {
             color: tomato !important;
         }
@@ -162,4 +186,19 @@ modal-lg" role="document">
             max-width: 500px;
             max-height: 500px;
         }
+
+        div#tekst_sverhu_kartinki {
+            position: relative;
+        }
+
+        .tekst_sverhu_kartinki_1 {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            text-transform: uppercase;
+            color: #fffbfb;
+            /* width: 350px; */
+        }
+
     </style>
+
