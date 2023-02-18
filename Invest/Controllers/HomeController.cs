@@ -20,7 +20,7 @@ namespace Invest.Controllers
                 estatesCommerce = dataManager.RealAstates.GetRealEstatesByType("Коммерческое", "Здание", 3),
                 estatesLand = dataManager.RealAstates.GetRealEstatesByType(" ", "Участок", 3),
                 estatesLiving = dataManager.RealAstates.GetRealEstatesByType("Жилое", "Здание", 3),
-                realEstates = dataManager.RealAstates.GetRealEstatesByType(" ", "Участок", 5)
+                realEstates = dataManager.RealAstates.GetRealEstatesByType(" ", "Здание", 5)
             };
             return View(model);
         }

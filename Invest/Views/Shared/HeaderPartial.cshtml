@@ -7,7 +7,7 @@
 @*Навигация*@
 <nav class="navbar navbar-expand-lg bg-dark" style="margin-bottom:5ex;">
     <div class="container-fluid justify-content-center">
-        <a class="nav-link " asp-controller="Home" asp-action="Index"><h2 class="text-white p-2" style="background:#56555499;;border-radius:2ex;">СтройИнвест23</h2> </a>
+        <a class="nav-link " asp-area="default" asp-controller="Home" asp-action="Index"><h2 class="text-white p-2" style="background:#56555499;;border-radius:2ex;">СтройИнвест23</h2> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,9 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><h4 class="text-white">Участки</h4></a>
                 </li>
-                User.Identity.IsAuthenticated
+                @if(User.Identity.IsAuthenticated)
                 {
-                User.IsInRole("admin")
+                @if(User.IsInRole("admin"))
                 {
                 <li class="nav-item">
                     <a class="nav-link " asp-area="Admin" asp-controller="Home" asp-action="Index"><h4 class="text-white">AdminPanel</h4></a>

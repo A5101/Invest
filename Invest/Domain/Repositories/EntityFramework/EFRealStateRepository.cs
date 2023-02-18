@@ -1,6 +1,8 @@
 ﻿using Invest.Domain.Entities;
 using Invest.Domain.Repositories.Abstract;
+using Invest.Models;
 using Invest.Service;
+using Microsoft.EntityFrameworkCore;
 using Type = Invest.Service.Type;
 
 namespace Invest.Domain.Repositories.EntityFramework
@@ -14,10 +16,19 @@ namespace Invest.Domain.Repositories.EntityFramework
             this.context = context;
         }
 
-        public IQueryable<RealEstate> GetRealEstatesByType(string usage, string type, int count)
+        public IEnumerable<RealEstatesViewModel> GetRealEstatesByType(string usage, string type, int count)
         {
-            if (usage == " ") return context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Type == type).Take(count);
-            return context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Usage == usage && x.Type == type).Take(count);
+            List<RealEstatesViewModel> list = new List<RealEstatesViewModel>();
+            List<RealEstate> temp;
+            if (usage == " ") 
+            {
+                temp = context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Type == type).Take(count).ToList(); 
+            } else temp = context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Usage == usage && x.Type == type).Take(count).ToList();
+            for (int i = 0; i < temp.Count; i++)
+            {
+                list.Add(new RealEstatesViewModel { RealEstate = temp[i], Image = context.Images.Where(x => x.StateId == temp[i].Id).FirstOrDefault() });
+            }
+            return list;
         }
 
         public IQueryable<RealEstate> GetRealEstates()
@@ -32,7 +43,9 @@ namespace Invest.Domain.Repositories.EntityFramework
 
         public void SaveRealAstatesItem(RealEstate realEstate)
         {
-            context.RealEstates.Add(realEstate);
+            if (realEstate.Id == default)
+                context.Entry(realEstate).State = EntityState.Added;
+            context.Entry(realEstate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
         }
 

@@ -23,7 +23,7 @@ namespace Invest.Controllers
 
             var astate = dataManager.RealAstates.GetRealEstateItemById(id);
 
-            string addr = astate.Address + astate.Floor != "Пусто" ? "" : "Этаж " + astate.Floor + astate.Number != "Пусто" ? "" : "Квартира " + astate.Number;
+            string addr = astate.Address;// + astate.Floor != null ? "" : "Этаж " + astate.Floor + astate.Number != null ? "" : "Квартира " + astate.Number;
 
             List<string> exp = astate.Expenses.Split(',').ToList();
 
