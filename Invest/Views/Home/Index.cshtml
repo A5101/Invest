@@ -55,7 +55,9 @@
                 @foreach (var kol in Model.estatesLiving)
                 {
 
-                    <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+                    <a class="col-3" asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
+                        <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) c>
+                    </a>
 
                 }
             </div>
@@ -69,7 +71,9 @@
             <div class="estatesItems">
                 @foreach (var kol in Model.estatesCommerce)
                 {
-                    <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+                    <a class="col-3" asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
+                        <img class ="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image))>
+                    </a>
                 }
             </div>
 
@@ -82,7 +86,9 @@
                 @foreach (var kol in Model.estatesLand)
                 {
 
-                    <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+                    <a class="col-3" asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
+                        <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) >
+                        </a>
                 }
             </div>
         </div>
