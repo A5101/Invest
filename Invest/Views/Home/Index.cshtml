@@ -20,17 +20,17 @@
             <h1 class="p-4">Наиболее популярные</h1>
         </div>
 
+
         <div id="carouselExampleFade" class="carousel slide carousel-fade rounded" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://rabota-za-granicej.ru/wp-content/uploads/d/7/c/d7cd967cdbe5a58f80a9684ca5e6c6ec.jpeg" class="d-block w-100" alt="">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://td-podyom.ru/images/1main/mikea.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://static.tildacdn.com/tild3139-6565-4939-b236-356430303364/05.jpg" class="d-block w-100" alt="...">
-                </div>
+                @foreach (var entity in Model.realEstates)
+                {
+                    <div class="carousel-item active">
+                        <a class="nav-link" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.RealEstate.Id">
+                            <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(entity.Image._Image)) class="d-block w-100" alt="">
+                        </a>
+                    </div>
+                }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,27 +44,63 @@
     </div>
 
     @*Типы недвижимости*@
-    <div class="RealState p-4">
+    <div class="RealState p-4 mx-auto">
 
-    @*Коммерческие здания*@
-    <div class="Commercial p-4">
-        <a href="#"><h2>Жилая недвижимость »</h2></a>
-    </div>
+        @*Коммерческие здания*@
+        <div class="Commercial p-4" style="background: #8080801a; border-radius: 2ex;">
+            <a href="#"><h2>Жилая недвижимость »</h2></a>
+            <div class="estatesItems">
+                @foreach (var kol in Model.estatesLiving)
+                {
+                   
+                    <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+                   
+                }
+            </div>
 
-    @*Жилые здания*@
-    <div class="Living p-4">
-        <a href="#"> <h2>Коммерческие недвижимость »</h2></a>
-    </div>
-    
-    @*Жилые здания*@
-    <div class="Land p-4">
-        <a href="#"><h2>Земля »</h2></a>
-    </div>
+
+        </div>
+
+        @*Жилые здания*@
+        <div class="Living p-4" style="background: #8080801a; border-radius: 2ex;">
+            <a href="#"> <h2>Коммерческая недвижимость »</h2></a>
+            <div class="estatesItems">
+                @foreach (var kol in Model.estatesCommerce)
+                {
+                    <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+                }
+            </div>
+
+        </div>
+
+        @*Жилые здания*@
+        <div class="Land p-4" style="background: #8080801a; border-radius: 2ex;">
+            <a href="#"><h2>Участки »</h2></a>
+            <div class="estatesItems">
+                @foreach (var kol in Model.estatesLand)
+                {
+                   
+                        <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+                }
+            </div>
+        </div>
     </div>
 
 </div>
 
 <style>
+    .col-3 {
+        width: 30% !important;
+        height: 230px !important;
+    }
+
+    .estatesItems img {
+        border-radius: 2ex;
+        margin-top: 2ex !important;
+        margin-right: 2rem;
+        box-shadow: 0 0 30px rgb(0 0 0 / 50%) !important;
+    }
+
     .carousel-inner {
         border-radius: 5ex !important;
         box-shadow: 0 0 30px rgba(0,0,0,0.5) !important;
