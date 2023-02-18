@@ -39,6 +39,11 @@ namespace Invest.Domain.Repositories.EntityFramework
             return context.RealEstates;
         }
 
+        public IQueryable<RealEstate> GetRealEstatesByNameUser(string name)
+        {
+            return context.RealEstates.Where(x => x.OwnerName == name);
+        }
+
         public RealEstate GetRealEstateItemById(Guid id)
         {
             return context.RealEstates.Where(x => x.Id == id).FirstOrDefault();

@@ -34,7 +34,7 @@ namespace Invest.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.UserName, Email = model.Email };
+                var user = new IdentityUser { UserName = model.UserName, Email = model.Email, };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (model.id != null)
                 {
@@ -43,7 +43,8 @@ namespace Invest.Controllers
 
                 if (result.Succeeded)
                 {
-
+                    if (model.Role == "Риелтор") await userManager.AddToRoleAsync(user, "rieltor");
+                    if (model.Role == "Пользователь") await userManager.AddToRoleAsync(user, "user");
                     EmailService emailService = new EmailService();
                     await emailService.SendEmailAsync(user.Email, "Подтверждение регистрации на сайте компании СтройИнвест23", "Здравствуйте, " + user.UserName + "." + " Благодарим за регистрацию на сайте ! " + "Для завершения регистрации перейдите по ссылке: " + "<br>" + "https://localhost:7133/Account/ConfirmEmail?id=" + user.Id);
                     // установка куки

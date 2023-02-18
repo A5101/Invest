@@ -24,5 +24,10 @@ namespace Invest.Controllers
             };
             return View(model);
         }
+
+        public IActionResult Own(string name)
+        {
+            return View(dataManager.RealAstates.GetRealEstatesByNameUser(name));
+        }
     }
 }

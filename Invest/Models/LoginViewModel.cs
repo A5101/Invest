@@ -10,6 +10,10 @@ namespace Invest.Models
         public string UserName { get; set; }
 
         [Required]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
+        [Required]
         [UIHint("password")]
         [Display(Name = "Password")]
         public string Password { get; set; }

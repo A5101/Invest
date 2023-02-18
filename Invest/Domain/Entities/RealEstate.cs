@@ -18,6 +18,8 @@ namespace Invest.Domain.Entities
         [Required]
         public int Cost { get; set; }
         [Required]
+        public int CostCadastr { get; set; }
+        [Required]
         public double Area { get; set; }
         [Required]
         public string Usage { get; set; }
@@ -41,5 +43,11 @@ namespace Invest.Domain.Entities
         public string Expenses { get; set; }//Расходы
         [Required]
         public int Income { get; set; }//Доходы
+        [Required]
+        public float Risks { get; set; }
+        [Required]
+        public double Liquid { get; set; }
+        [Required]
+        public string OwnerName { get; set; }
     }
 }

@@ -27,6 +27,19 @@ namespace Invest.Domain
                 NormalizedName = "ADMIN"
             });
 
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "44546e06-8719-4ad8-b88a-f271ae9d6eac",
+                Name = "rieltor",
+                NormalizedName = "RIELTOR"
+            });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "44546e06-8719-4ad8-b88a-f271ae9d6ead",
+                Name = "user",
+                NormalizedName = "USER"
+            });
+
             modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
             {
                 Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",

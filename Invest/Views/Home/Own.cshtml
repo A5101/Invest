@@ -1,7 +1,7 @@
 ﻿@using Invest.Domain.Entities
 @model IQueryable<RealEstate>
 @{
-    string strTitle = "Панель администратора";
+    string strTitle = "Мои объявления";
     ViewBag.Title = strTitle;
 }
 
@@ -32,22 +32,22 @@
         {
         @foreach (RealEstate entity in Model)
         {
-        <div class="nedv-info border border-dark border-2 rounded-1 mb-1 d-flex">
-            <i class="bi bi-eye"></i>
-            <h4 class="m-2">entity.Address</h4>
-            <div class="buttons d-flex">
-                <a class="me-md-2" asp-area="default" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.Id"><h4><button type="button" class="btn btn-warning">Просмотр</button></h4></a>
-                <a asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id="@entity.Id"><button type="button" class="btn btn-danger">Редактировать</button></a>
-                <form asp-area="Admin" asp-controller="RealEstatesItems" asp-action="AddImages" asp-route-id="@entity.Id" method="post" enctype="multipart/form-data">
-                    <input type="file" multiple class="m-2" name="coll" />
-                    <button type="submit" class="btn btn-primary col-xs-12">Add</button>
-                </form>
-                <form class="m-2" style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Delete" method="post">
-                    <input type="hidden" name="id" value="@entity.Id">
-                    <a href="#" onclick="document.getElementById('form-@entity.Id').submit();"><h4>Удалить</h4> </a>
-                </form>
+            <div class="nedv-info border border-dark border-2 rounded-1 mb-1 d-flex">
+                <i class="bi bi-eye"></i>
+                <h4 class="m-2">entity.Address</h4>
+                <div class="buttons d-flex">
+                    <a class="me-md-2" asp-area="default" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.Id"><h4><button type="button" class="btn btn-warning">Просмотр</button></h4></a>
+                    <a asp-area="default" asp-controller="RealEstate" asp-action="Edit" asp-route-id="@entity.Id"><button type="button" class="btn btn-danger">Редактировать</button></a>
+                    <form asp-area="default" asp-controller="RealEstate" asp-action="AddImages" asp-route-id="@entity.Id" method="post" enctype="multipart/form-data">
+                        <input type="file" multiple class="m-2" name="coll" />
+                        <button type="submit" class="btn btn-primary col-xs-12">Add</button>
+                    </form>
+                    <form class="m-2" style="display: inline-block;" id="form-@entity.Id" asp-area="default" asp-controller="RealEstate" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@entity.Id">
+                        <a href="#" onclick="document.getElementById('form-@entity.Id').submit();"><h4>Удалить</h4> </a>
+                    </form>
+                </div>
             </div>
-        </div>
         }
         }
     </div>
