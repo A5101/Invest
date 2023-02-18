@@ -31,8 +31,8 @@
                         <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(images)) class="d-block w-100" alt="...">
                     </div>
                     <form asp-controller="Favorite" asp-action="AddToFavorite" asp-route-eventId="@Model.RealEstate.Id" asp-route-userName="@User.Identity.Name">
-                                <button type="submit"><i style="font-size:4vmin;" class="fa-regular fa-heart"></i></button>
-                            </form>
+                        <button type="submit"><i style="font-size:4vmin;" class="fa-regular fa-heart"></i></button>
+                    </form>
                 }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -104,6 +104,14 @@
                 <h2 style="margin-left:3px;margin-top:-1px;color:red !important;">
                     ~ @Model.TotalExpenses ₽
                 </h2>
+                
+                    @foreach (var item in Model.Expenses)
+                    {<h2 style="margin-left:3px;margin-top:-1px;color:red !important;">
+                        @item ₽ <br>
+                    </h2>
+                    }
+
+               
             </div>
             <div class="d-flex" style="margin-left: 3ex;">
                 <h3> Итого:</h3>
