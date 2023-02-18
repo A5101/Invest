@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F2NFo221tAv/Ndls/naFNyOoP1U1ltTg3PKTclIVYeqLmf/c8DAA1twtkRBvyGBwEFtMCreiW3EoTcJgZfJrIg==",
+  "dgSpecHash": "DpRjC5ywmnoM8fSJNfVKdtuJzLD2LmcMTQiBHOmgCJgKom1N0GRt/Lg+zbCKfyZEx5PXWU8dy33Snq2+jliO5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sasha\\source\\repos\\Invest\\Invest\\Invest.csproj",
+  "projectFilePath": "C:\\Users\\Sasha\\Desktop\\АКГ\\Invest\\Invest\\Invest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sasha\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Sasha\\.nuget\\packages\\mailkit\\3.5.0\\mailkit.3.5.0.nupkg.sha512",

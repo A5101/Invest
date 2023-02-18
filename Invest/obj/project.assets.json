@@ -10383,11 +10383,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sasha\\source\\repos\\Invest\\Invest\\Invest.csproj",
+      "projectUniqueName": "C:\\Users\\Sasha\\Desktop\\АКГ\\Invest\\Invest\\Invest.csproj",
       "projectName": "Invest",
-      "projectPath": "C:\\Users\\Sasha\\source\\repos\\Invest\\Invest\\Invest.csproj",
+      "projectPath": "C:\\Users\\Sasha\\Desktop\\АКГ\\Invest\\Invest\\Invest.csproj",
       "packagesPath": "C:\\Users\\Sasha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sasha\\source\\repos\\Invest\\Invest\\obj\\",
+      "outputPath": "C:\\Users\\Sasha\\Desktop\\АКГ\\Invest\\Invest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sasha\\AppData\\Roaming\\NuGet\\NuGet.Config",
