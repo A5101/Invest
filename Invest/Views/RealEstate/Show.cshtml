@@ -1,7 +1,4 @@
-﻿
-
-
-@model Invest.Models.ShowRealEstateViewModel
+﻿@model Invest.Models.ShowRealEstateViewModel
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/bootstrap.min.css" />
@@ -81,14 +78,14 @@
                 <h2 class="text-gray" style="margin-left:3px;margin-top:-1px;color:tomato;">@Model.RealEstate.Area м²</h2>
             </div>
             <a href="#" data-toggle="modal" data-target="#exampleModal">
-                <img src="https://na-dache.pro/uploads/posts/2021-11/1635957455_62-na-dache-pro-p-chertezh-kvartiri-foto-73.png" class="d-block mx-auto rounded" alt="...">
+                <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(Model.Plan)) class="d-block mx-auto rounded" alt="...">
             </a>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body p-0">
-                        <img src="https://na-dache.pro/uploads/posts/2021-11/1635957455_62-na-dache-pro-p-chertezh-kvartiri-foto-73.png" class="d-block w-100" alt="...">
+                        <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(Model.Plan)) class="d-block w-100" alt="...">
                     </div>
                 </div>
             </div>

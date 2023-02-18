@@ -4,6 +4,7 @@ using Invest.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Invest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230218023743_init10")]
+    partial class init10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,7 +173,7 @@ namespace Invest.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "e220b11f-9fee-4897-9421-01401a7018da",
+                            ConcurrencyStamp = "8b9d1158-179d-436e-a532-7fbea19cc442",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -271,11 +273,11 @@ namespace Invest.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "47ecf6cc-b1e7-4179-bf0f-cdbfed271a76",
+                            ConcurrencyStamp = "fdf22d8d-37a4-4ca2-bcdc-75e836e51d59",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOiaIo8a/yh21EEmCQZBqDYSoi959L7U95LbddSah0B/81H1i2kFp6c1xOEvmG/6ew==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHc+kYjwzwMZuRBNWgDiM9QDcD77fPE/IK5RqRXRkLRSZoDxY9uPXrnxrpkrfO92gQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

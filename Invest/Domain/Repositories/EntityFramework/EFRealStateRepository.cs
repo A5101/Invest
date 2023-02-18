@@ -26,7 +26,9 @@ namespace Invest.Domain.Repositories.EntityFramework
             } else temp = context.RealEstates.OrderByDescending(x => x.DateAdded).Where(x => x.Usage == usage && x.Type == type).Take(count).ToList();
             for (int i = 0; i < temp.Count; i++)
             {
-                list.Add(new RealEstatesViewModel { RealEstate = temp[i], Image = context.Images.Where(x => x.StateId == temp[i].Id).FirstOrDefault() });
+                var t = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault();
+                if (t != default)
+                list.Add(new RealEstatesViewModel { RealEstate = temp[i], Image = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault() });
             }
             return list;
         }
@@ -43,9 +45,10 @@ namespace Invest.Domain.Repositories.EntityFramework
 
         public void SaveRealAstatesItem(RealEstate realEstate)
         {
-            if (realEstate.Id == default)
+            if (realEstate.Id == default) 
+            { 
                 context.Entry(realEstate).State = EntityState.Added;
-            context.Entry(realEstate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }else  context.Entry(realEstate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
         }
 
