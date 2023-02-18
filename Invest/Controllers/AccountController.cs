@@ -103,6 +103,12 @@ namespace Invest.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> SetChat(string Name, string id)
+        {
+            IdentityUser user = await userManager.FindByNameAsync(Name);
+            user.PhoneNumber = id;
+            return RedirectToAction("Index", "Home");
+        }
 
         [Authorize]
         public async Task<IActionResult> Profile()

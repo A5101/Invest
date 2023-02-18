@@ -25,11 +25,14 @@
                 <div class="carousel-item active">
                     <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(@Model.Images.First())) class="d-block w-100" alt="...">
                 </div>
-               @foreach( var images in Model.Images.Skip(1))
+                @foreach (var images in Model.Images.Skip(1))
                 {
-                <div class="carousel-item">
-                    <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(images)) class="d-block w-100" alt="...">
-                </div>
+                    <div class="carousel-item">
+                        <img src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(images)) class="d-block w-100" alt="...">
+                    </div>
+                    <form asp-controller="Favorite" asp-action="AddToFavorite" asp-route-eventId="@Model.RealEstate.Id" asp-route-userName="@User.Identity.Name">
+                                <button type="submit"><i style="font-size:4vmin;" class="fa-regular fa-heart"></i></button>
+                            </form>
                 }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -47,26 +50,26 @@
     <div class="info mx-auto d-grid">
         <h3> Местоположение: </h3>
         @*Карта Яндекса*@
-                @await Html.PartialAsync("Map", new List<Invest.Domain.Entities.RealEstate>{Model.RealEstate})
+        @await Html.PartialAsync("Map", new List<Invest.Domain.Entities.RealEstate>{Model.RealEstate})
         @*Эксплуатация*@
         <div class="roomAreatext d-flex">
             <h3> Статус: </h3>
 
-            @if(!@Model.RealEstate.AreReady)
+            @if (!@Model.RealEstate.AreReady)
             {
-            <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> Не в эксплуатации </h2>
+                <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> Не в эксплуатации </h2>
             }
             else
             {
-            <h2 style="margin-left:3px;margin-top:-1px;color:green !important;"> В эксплуатации, </h2>
-            @if(Model.RealEstate.Isrepaired)
-            {
-            <h2 style="margin-left:3px;margin-top:-1px;color:green !important;"> с готовым ремонтом </h2>
-            }
-            else
-            {
-            <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> без ремонта </h2>
-            }
+                <h2 style="margin-left:3px;margin-top:-1px;color:green !important;"> В эксплуатации, </h2>
+                @if (Model.RealEstate.Isrepaired)
+                {
+                    <h2 style="margin-left:3px;margin-top:-1px;color:green !important;"> с готовым ремонтом </h2>
+                }
+                else
+                {
+                    <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> без ремонта </h2>
+                }
             }
 
         </div>
@@ -131,7 +134,7 @@
 
     <script>
         var price = @Html.Raw(Json.Serialize(Model.HistoryPrice));
-            var date = @Html.Raw(Json.Serialize(Model.HistoryDate));
+        var date = @Html.Raw(Json.Serialize(Model.HistoryDate));
         const ctx = document.getElementById("chart").getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'line',
@@ -180,5 +183,19 @@
             max-width: 500px;
             max-height: 500px;
         }
+
+        div#tekst_sverhu_kartinki {
+            position: relative;
+        }
+
+        .tekst_sverhu_kartinki_1 {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            text-transform: uppercase;
+            color: #fffbfb;
+            /* width: 350px; */
+        }
+
     </style>
 
