@@ -2,7 +2,7 @@
 
 namespace Invest.Models
 {
-    public class RealEstatesViewModel
+    public class RealEstatesWithImageViewModel
     {
         public RealEstate RealEstate { get; set; }
         public Image Image { get; set; }

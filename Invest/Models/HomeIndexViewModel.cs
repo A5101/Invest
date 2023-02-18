@@ -3,9 +3,9 @@ namespace Invest.Models
 {
     public class HomeIndexViewModel
     {
-        public IEnumerable<RealEstatesViewModel> realEstates { get; set; }
-        public IEnumerable<RealEstatesViewModel> estatesCommerce { get; set; }
-        public IEnumerable<RealEstatesViewModel> estatesLiving { get; set; }
-        public IEnumerable<RealEstatesViewModel> estatesLand { get; set; }
+        public IEnumerable<RealEstatesWithImageViewModel> realEstates { get; set; }
+        public IEnumerable<RealEstatesWithImageViewModel> estatesCommerce { get; set; }
+        public IEnumerable<RealEstatesWithImageViewModel> estatesLiving { get; set; }
+        public IEnumerable<RealEstatesWithImageViewModel> estatesLand { get; set; }
     }
 }

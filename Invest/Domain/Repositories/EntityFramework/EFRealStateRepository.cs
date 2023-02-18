@@ -16,9 +16,9 @@ namespace Invest.Domain.Repositories.EntityFramework
             this.context = context;
         }
 
-        public IEnumerable<RealEstatesViewModel> GetRealEstatesByType(string usage, string type, int count)
+        public IEnumerable<RealEstatesWithImageViewModel> GetRealEstatesByType(string usage, string type, int count)
         {
-            List<RealEstatesViewModel> list = new List<RealEstatesViewModel>();
+            List<RealEstatesWithImageViewModel> list = new List<RealEstatesWithImageViewModel>();
             List<RealEstate> temp;
             if (usage == " ") 
             {
@@ -28,7 +28,7 @@ namespace Invest.Domain.Repositories.EntityFramework
             {
                 var t = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault();
                 if (t != default)
-                list.Add(new RealEstatesViewModel { RealEstate = temp[i], Image = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault() });
+                list.Add(new RealEstatesWithImageViewModel { RealEstate = temp[i], Image = context.Images.Where(x => x.StateId == temp[i].Id).OrderBy(x => x.DateAdded).Skip(1).FirstOrDefault() });
             }
             return list;
         }
