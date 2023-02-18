@@ -2,57 +2,78 @@
 @model FilterViewModel
 
 <div class="search-wrapper">
-    <form method="post">
-    <div class="search-head d-flex bg-dark text-white justify-content-center" style="padding-bottom: 2rem;padding-top: 2rem;border-radius: 2rem;">
-        <div class="min-max-cost">
-            <div class="min">
-                <h4>Минимальная цена</h4>
-                <input asp-for="MinCost" type="number" placeholder="Мин." />
-            </div>
-            <div class="max">
-                <h4>Максимальная цена</h4>
-                <input asp-for ="MaxCost" type="number" placeholder="Макс." />
-            </div>
-        </div>
-       <div class="min-max-area" style="margin-left:2rem;">
-            <div class="min">
-                    <h4>Минимальная площадь</h4>
-                <input asp-for="MinArea" type="number" placeholder="Мин." />
-                </div>
-            <div class="max">
-                <h4>Максимальная площадь</h4>
-                <input asp-for ="MaxArea" type="number" placeholder="Макс." />
-            </div>
-        </div>
-        <div class="min-max-income" style="margin-left:2rem;">
-            <div class="min">
-                <h4>Минимальный доход</h4>
-                <input asp-for="MinIncome" type="number" placeholder="Мин." />
-            </div>
-            <div class="max">
-                <h4>Максимальный доход</h4>
-                <input asp-for ="MaxIncome" type="number" placeholder="Макс." />
-            </div>
-        </div>
-            <button class="btn btn-primary btn-block" type="submit">Отфильтровать</button>
-    </div>
-    </form>
-    <div class="search-body bg-dark text-white justify-content-center rounded-2">
-        @if (Model!=null)
-        {
-            @foreach(var x in Model.Estate)
-            {
-                <a asp-controller="RealEstate" asp-action="Show" asp-route-id="@x.Id">
-                  <div class="row bg-dark rounded-2">
-            <div class="text-white rounded-2"><h2>@x.Address</h2></div>
-            <div class="text-white rounded-2"><h2>Площадь: @x.Area</h2></div>
-            <div class="text-white rounded-2"><h2>Стоимость кв/м: @x.Cost</h2></div>
-        </div>
-        </a>
-            }
-        }
-    </div>
-
-    <div class="search-body">
-    </div>
+<form method="post">
+<div>
+<div class="se-wrapper col-12 bg-dark text-white p-3 mx-auto shadow p-3 mb-2 rounded">
+<h2 class="mx-auto">Поиск по фильтрам</h2>
 </div>
+<div class="new d-flex">
+<div class="col-4 bg-secondary text-white p-3 shadow rounded ">
+<div class="filters">
+<h4>Цена м²(₽)</h4>
+<div class="min-max-cost d-flex">
+<div class="min">
+<input asp-for="MinCost" type="number" placeholder="Мин." />
+</div>
+<div class="max">
+<input asp-for="MaxCost" type="number" placeholder="Макс." />
+</div>
+</div>
+</div>
+<div class="filters">
+<h4>Площадь м²</h4>
+<div class="min-max-area d-flex">
+<div class="min">
+<input asp-for="MinArea" type="number" placeholder="Мин." />
+</div>
+<div class="max">
+<input asp-for="MaxArea" type="number" placeholder="Макс." />
+</div>
+</div>
+</div>
+<div class="filters">
+<h4>Прибыль (₽)</h4>
+<div class="min-max-income d-flex">
+<div class="min">
+<input asp-for="MinIncome" type="number" placeholder="Мин." />
+</div>
+<div class="max">
+<input asp-for="MaxIncome" type="number" placeholder="Макс." />
+</div>
+</div>
+</div>
+<div class="filters">
+<h4>Рейтинг</h4>
+<div class="min-max-cost d-flex">
+<div class="min">
+<input asp-for="MinRaiting" type="number" placeholder="Мин." />
+</div>
+<div class="max">
+<input asp-for="MaxRaiting" type="number" placeholder="Макс." />
+</div>
+</div>
+</div>
+<button class="btn btn-primary btn-block" type="submit" style="margin-left: 8rem;margin-top: 1rem;">Отфильтровать</button>
+</div>
+<div class="col-8 bg-dark text-white p-3 shadow rounded d-grid">
+@if (Model!=null)
+{
+@foreach(var x in Model.Estate)
+{
+<a asp-controller="RealEstate" asp-action="Show" asp-route-id="@x.Id">
+<div class="row bg-dark rounded-2 border border-2 border-light">
+<div class="text-white rounded-2"><h4>@x.Address</h4></div>
+<div class="text-white rounded-2"><h4>Площадь: @x.Area</h4></div>
+<div class="text-white rounded-2"><h4>Стоимость кв/м: @x.Cost</h4></div></div></a>
+}
+} </div>
+</div>
+</div>
+</form>
+</div>
+
+<style>
+.max {
+margin-left: 1rem;
+}
+</style

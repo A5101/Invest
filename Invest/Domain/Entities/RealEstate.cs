@@ -47,7 +47,6 @@ namespace Invest.Domain.Entities
         public float Risks { get; set; }
         [Required]
         public double Liquid { get; set; }
-        [Required]
-        public string OwnerName { get; set; }
+        public string? OwnerName { get; set; }
     }
 }

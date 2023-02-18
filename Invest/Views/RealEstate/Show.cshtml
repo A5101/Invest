@@ -122,6 +122,21 @@
             <h2 style="margin-left:3px;margin-top:-1px;color:tomato;"> ~ @(Model.RealEstate.Cost * Model.RealEstate.Area / Model.RealEstate.Income) месяцев </h2>
         </div>
 
+        <div class="roomAreatext d-flex">
+            <h3> Риски </h3>
+            <h2 style="margin-left:3px;margin-top:-1px;color:tomato;">@Model.RealEstate.Risks  </h2>
+        </div>
+
+        <div class="roomAreatext d-flex">
+            <h3> Ликвидность </h3>
+            <h2 style="margin-left:3px;margin-top:-1px;color:tomato;">@Model.RealEstate.Liquid  </h2>
+        </div>
+
+        <div class="roomAreatext d-flex">
+            <h3> Рейтинг </h3>
+            <h2 style="margin-left:3px;margin-top:-1px;color:tomato;">@Model.RealEstate.Raiting  </h2>
+        </div>
+
 
         @*Рыночная стоимость*@
         <div>

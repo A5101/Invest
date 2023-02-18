@@ -20,7 +20,7 @@
             <h1>@strTitle</h1>
         </div>
         <div class="pa-body mx-auto">
-            <a asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" asp-route-id="">
+            <a asp-area="default" asp-controller="RealEstate" asp-action="Edit" asp-route-id="">
                 <button type="button" class="btn btn-success">Добавить недвижимость</button>
             </a>
         </div>
@@ -28,13 +28,13 @@
     <div class="pa-items mx-auto">
         <h2 class="text-red">Недвижимость:</h2>
 
-        @(Model.Any())
+        @if(Model.Any())
         {
         @foreach (RealEstate entity in Model)
         {
             <div class="nedv-info border border-dark border-2 rounded-1 mb-1 d-flex">
                 <i class="bi bi-eye"></i>
-                <h4 class="m-2">entity.Address</h4>
+                <h4 class="m-2">@entity.Address</h4>
                 <div class="buttons d-flex">
                     <a class="me-md-2" asp-area="default" asp-controller="RealEstate" asp-action="Show" asp-route-id="@entity.Id"><h4><button type="button" class="btn btn-warning">Просмотр</button></h4></a>
                     <a asp-area="default" asp-controller="RealEstate" asp-action="Edit" asp-route-id="@entity.Id"><button type="button" class="btn btn-danger">Редактировать</button></a>

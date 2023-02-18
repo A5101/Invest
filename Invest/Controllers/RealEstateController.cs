@@ -117,16 +117,17 @@ namespace Invest.Controllers
             return View(model);
         }
 
-        public IActionResult Edit(Guid id)
+        public IActionResult Edit(Guid id, string name)
         {
-            var entity = id == default ? new RealEstate() : dataManager.RealAstates.GetRealEstateItemById(id);
-            return View(entity);
+            if (id == default) return View(new RealEstate() { OwnerName = name}); else return View(dataManager.RealAstates.GetRealEstateItemById(id));
         }
+
         [HttpPost]
-        public IActionResult Edit(RealEstate model)
+        public IActionResult Edit(RealEstate model, string name )
         {
             if (ModelState.IsValid)
             {
+                model.OwnerName = name;
                 dataManager.RealAstates.SaveRealAstatesItem(model);
                 dataManager.HistoryPrices.AddHistory(model.Id, (int)model.Area * model.Cost, DateTime.UtcNow);
                 return base.RedirectToAction(nameof(Invest.Controllers.HomeController.Index), nameof(Invest.Controllers.HomeController).CutController());

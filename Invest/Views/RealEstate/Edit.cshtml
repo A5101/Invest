@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="pa-wrapper col-8 bg-dark text-white p-3 mx-auto shadow p-3 mb-5 rounded d-grid">
-        <form asp-area="Admin" asp-controller="RealEstatesItems" asp-action="Edit" method="post" enctype="multipart/form-data">
+        <form asp-controller="RealEstate" asp-action="Edit" asp-route-name="@User.Identity.Name" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="DateAdded" />
 
@@ -73,7 +73,7 @@
 
             <div class="div-box">
                 <h4>Описание</h4>
-<textarea asp-for="Description" /></textarea>
+<textarea asp-for="Description"></textarea>
                 <span asp-validation-for="Description"></span>
             </div>
 
