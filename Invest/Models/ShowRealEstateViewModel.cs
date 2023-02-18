@@ -1,7 +1,7 @@
 ﻿using Invest.Domain.Entities;
 namespace Invest.Models
 {
-    public class ShowRealAstateViewModel
+    public class ShowRealEstateViewModel
     {
         public RealEstate RealEstate { get; set; }
         public byte[] Plan { get; set; }

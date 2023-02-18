@@ -20,10 +20,10 @@ namespace Invest.Controllers
         }
         public IActionResult Show(Guid id)
         {
-            
+
             var astate = dataManager.RealAstates.GetRealEstateItemById(id);
 
-            string addr = astate.Address + astate.Floor == "Пусто" ? "" : "Этаж "  + astate.Floor + astate.Number == "Пусто" ? "" : "Квартира "+astate.Number;
+            string addr = astate.Address + astate.Floor != "Пусто" ? "" : "Этаж " + astate.Floor + astate.Number != "Пусто" ? "" : "Квартира " + astate.Number;
 
             List<string> exp = astate.Expenses.Split(',').ToList();
 
@@ -31,20 +31,26 @@ namespace Invest.Controllers
 
             for (int i = 0; i < exp.Count; i++)
             {
-                 total += int.Parse(exp[i][exp[i].IndexOf(':')..]);
+                total += int.Parse(exp[i].Substring(exp[i].IndexOf(':') + 1, exp[i].Length - exp[i].IndexOf(':') - 1));
             }
 
-            ShowRealAstateViewModel model = new()
+            var plan = dataManager.Images.GetPlanImageByAstateId(id);
+            var im = dataManager.Images.GetPlanImagesByAstateId(id);
+            var ex = astate.Expenses.Split(',').ToList();
+            var hp = dataManager.HistoryPrices.GetHistoryPrice(id);
+            var hd = dataManager.HistoryPrices.GetHistoryDate(id);
+            var mp = dataManager.HistoryPrices.GetHistoryPrice(id).Min() - 100000;
+            ShowRealEstateViewModel model = new()
             {
                 RealEstate = astate,
-                Plan = dataManager.Images.GetPlanImageByAstateId(id),
-                Images = dataManager.Images.GetPlanImagesByAstateId(id),
+                Plan = plan,
+                Images = im,
                 FullAddress = addr,
-                Expenses = astate.Expenses.Split(',').ToList(),
+                Expenses = ex,
                 TotalExpenses = total,
-                HistoryPrice = dataManager.HistoryPrices.GetHistoryPrice(id),
-                HistoryDate = dataManager.HistoryPrices.GetHistoryDate(id),
-                MinPrice = dataManager.HistoryPrices.GetHistoryPrice(id).Min() - 100000
+                HistoryPrice = hp,
+                HistoryDate = hd,
+                MinPrice = mp
             };
             return View(model);
         }
