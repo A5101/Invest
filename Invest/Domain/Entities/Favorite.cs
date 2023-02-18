@@ -4,6 +4,7 @@ namespace Invest.Domain.Entities
 {
     public class Favorite
     {
+        public Guid ID { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]

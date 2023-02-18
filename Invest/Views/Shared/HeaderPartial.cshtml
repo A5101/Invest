@@ -20,43 +20,35 @@
                     <a class="nav-link" href="#"><h4 class="text-white">Участки</h4></a>
                 </li>
 
-
-                <li class="classnav-item dropdown">
-                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarScrollingDropdown">
-                        <li>
-                            <input class="dropdown-item" type="text" name="code" />
-                            <button class="dropdown-item" type="submit" >Ввести</button>
-                        </li>
-                    </ul>
-                </li>
-
-
                 @if (User.Identity.IsAuthenticated)
                 {
-                @if (User.IsInRole("admin"))
-                {
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="Admin" asp-controller="Home" asp-action="Index"><h4 class="text-white">AdminPanel</h4></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " asp-controller="Account" asp-action="Logout"><h4 class="text-white">Выйти</h4></a>
-                </li>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="Admin" asp-controller="Home" asp-action="Index"><h4 class="text-white">AdminPanel</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Account" asp-action="Logout"><h4 class="text-white">Выйти</h4></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Favorite" asp-action="ShowFavorite" asp-route-name="@User.Identity.Name"><h4 class="text-white">Избранное</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Home" asp-action="Index"><h4 class="text-white">Профиль</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Account" asp-action="Logout"><h4 class="text-white">Выйти</h4></a>
+                        </li>
+                    }
                 }
                 else
                 {
-                <li class="nav-item">
-                    <a class="nav-link " asp-controller="Home" asp-action="Index"><h4 class="text-white">Профиль</h4></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " asp-controller="Account" asp-action="Logout"><h4 class="text-white">Выйти</h4></a>
-                </li>
-                }
-                }
-                else
-                {
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Account" asp-action="Login"><h4 class="text-white">Войти</h4></a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><h4 class="text-white">Войти</h4></a>
+                    </li>
                 }
             </ul>
 
