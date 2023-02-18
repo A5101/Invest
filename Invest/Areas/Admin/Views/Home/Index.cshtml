@@ -28,7 +28,7 @@
     <div class="pa-items mx-auto">
         <h2 class="text-red">Недвижимость:</h2>
 
-        @(Model.Any())
+        @if(Model.Any())
         {
         @foreach (RealEstate entity in Model)
         {
