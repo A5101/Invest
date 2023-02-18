@@ -19,7 +19,6 @@ namespace Invest.Domain
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Favorite>().HasNoKey();
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
