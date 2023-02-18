@@ -18,6 +18,12 @@ namespace Invest.Controllers
         {
             return View();
         }
+
+        public IActionResult List(string usage)
+        {
+            return View(dataManager.RealAstates.GetRealEstateByUsge(usage));
+        }
+
         public IActionResult Show(Guid id)
         {
 

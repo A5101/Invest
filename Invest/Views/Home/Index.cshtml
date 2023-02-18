@@ -41,9 +41,9 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        
+
     </div>
-    
+
 
     @*Типы недвижимости*@
     <div class="RealState p-4 mx-auto">
@@ -54,9 +54,9 @@
             <div class="estatesItems">
                 @foreach (var kol in Model.estatesLiving)
                 {
-                   
+
                     <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
-                   
+
                 }
             </div>
 
@@ -81,8 +81,8 @@
             <div class="estatesItems">
                 @foreach (var kol in Model.estatesLand)
                 {
-                   
-                        <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
+
+                    <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) class="d-block w-100" alt="...">
                 }
             </div>
         </div>

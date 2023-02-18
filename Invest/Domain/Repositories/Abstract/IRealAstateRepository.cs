@@ -12,5 +12,6 @@ namespace Invest.Domain.Repositories.Abstract
         public RealEstate GetRealEstateItemById(Guid id);
         public void SaveRealAstatesItem(RealEstate realEstate);
         public void DeletRealAsteteItem(Guid id);
+        public IQueryable<RealEstate> GetRealEstateByUsge(string usage);
     }
 }

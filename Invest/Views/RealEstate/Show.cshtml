@@ -49,8 +49,12 @@
     </div>
 
     @*Информация*@
+    <div class="d-flex">
+        <h3> Рассчетная стоимость объекта:</h3>
+        <h2 style="margin-left:3px;margin-top:-1px;color:#0239ff !important;"> ~ @(Model.RealEstate.Cost*Model.RealEstate.Area) ₽ </h2>
+    </div>
     <div class="info mx-auto d-grid">
-        <h3> Местоположение: </h3>
+        <h3 class="mx-auto"> Местоположение: </h3>
         @*Карта Яндекса*@
         <div class="mx-auto"> @await Html.PartialAsync("Map", new List<Invest.Domain.Entities.RealEstate>{Model.RealEstate})</div>
        

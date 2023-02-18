@@ -15,16 +15,16 @@ namespace Invest.Controllers
 
         public IActionResult Search(FilterViewModel model)
         {
-            List<string> exp = dataManager.RealAstates.GetRealEstates().Select(x => x.Expenses).ToList();
-
-            int total = 0;
-
-            for (int i = 0; i < exp.Count; i++)
+            if (model.MaxCost == 0)
             {
-                total += int.Parse(exp[i].Substring(exp[i].IndexOf(':') + 1, exp[i].Length - exp[i].IndexOf(':') - 1));
+                return View();
             }
-            dataManager.RealAstates.GetRealEstates().Where(x => x.Income <= model.MaxIncome && x.Income >= model.MinIncome && x.Raiting <= model.MaxRaiting && x.Raiting >= model.MinRaiting && total <= model.MaxExp && total >= model.MinExp);
-            return View();
-        } 
+            else
+            {
+
+                return View(new FilterViewModel { Estate = dataManager.RealAstates.GetRealEstates().Where(x => x.Income <= model.MaxIncome && x.Income >= model.MinIncome).ToList() });
+            }
+        }
+
     }
 }

@@ -1,0 +1,58 @@
+﻿@using Invest.Models
+@model FilterViewModel
+
+<div class="search-wrapper">
+    <form method="post">
+    <div class="search-head d-flex bg-dark text-white justify-content-center" style="padding-bottom: 2rem;padding-top: 2rem;border-radius: 2rem;">
+        <div class="min-max-cost">
+            <div class="min">
+                <h4>Минимальная цена</h4>
+                <input asp-for="MinCost" type="number" placeholder="Мин." />
+            </div>
+            <div class="max">
+                <h4>Максимальная цена</h4>
+                <input asp-for ="MaxCost" type="number" placeholder="Макс." />
+            </div>
+        </div>
+       <div class="min-max-area" style="margin-left:2rem;">
+            <div class="min">
+                    <h4>Минимальная площадь</h4>
+                <input asp-for="MinArea" type="number" placeholder="Мин." />
+                </div>
+            <div class="max">
+                <h4>Максимальная площадь</h4>
+                <input asp-for ="MaxArea" type="number" placeholder="Макс." />
+            </div>
+        </div>
+        <div class="min-max-income" style="margin-left:2rem;">
+            <div class="min">
+                <h4>Минимальный доход</h4>
+                <input asp-for="MinIncome" type="number" placeholder="Мин." />
+            </div>
+            <div class="max">
+                <h4>Максимальный доход</h4>
+                <input asp-for ="MaxIncome" type="number" placeholder="Макс." />
+            </div>
+        </div>
+            <button class="btn btn-primary btn-block" type="submit">Отфильтровать</button>
+    </div>
+    </form>
+    <div class="search-body bg-dark text-white justify-content-center rounded-2">
+        @if (Model!=null)
+        {
+            @foreach(var x in Model.Estate)
+            {
+                <a asp-controller="RealEstate" asp-action="Show" asp-route-id="@x.Id">
+                  <div class="row bg-dark rounded-2">
+            <div class="text-white rounded-2"><h2>@x.Address</h2></div>
+            <div class="text-white rounded-2"><h2>Площадь: @x.Area</h2></div>
+            <div class="text-white rounded-2"><h2>Стоимость кв/м: @x.Cost</h2></div>
+        </div>
+        </a>
+            }
+        }
+    </div>
+
+    <div class="search-body">
+    </div>
+</div>
