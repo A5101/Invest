@@ -12,10 +12,15 @@ namespace Invest.Domain.Repositories.EntityFramework
             this.context = context;
         }
 
-        public int[] GetHistoryPrice(Guid id)
+        public double[] GetHistoryPrice(Guid id)
         {
             var temp = context.HistoryPrices.Where(x => x.StateId == id).OrderBy(x => x.Date);
             return temp.Select(x => x.Price).ToArray();
+        }
+
+        public void Clear()
+        {
+            context.HistoryPrices.RemoveRange(context.HistoryPrices);
         }
 
         public string[] GetHistoryDate(Guid id)
@@ -24,7 +29,7 @@ namespace Invest.Domain.Repositories.EntityFramework
             return temp.Select(x => x.Date.ToString()).ToArray();
         }
 
-        public void AddHistory(Guid id, int price, DateTime date)
+        public void AddHistory(Guid id, double price, DateTime date)
         {
             context.Add(new HistoryPrice { Date = date, Price = price, StateId = id});
             context.SaveChanges();

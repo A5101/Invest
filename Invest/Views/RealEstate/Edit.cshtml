@@ -113,6 +113,24 @@
                 <span asp-validation-for="Income"></span>
             </div>
 
+            <div class="div-box">
+                <h4>Дата начала строительства*</h4>
+                <input type="datetime" class="form-control" asp-for="BuildStartDate" />
+                <span asp-validation-for="BuildStartDate"></span>
+            </div>
+
+            <div class="div-box">
+                <h4>Дата конца строительства*</h4>
+                <input type="datetime" class="form-control" asp-for="BuildEndDate" />
+                <span asp-validation-for="BuildEndDate"></span>
+            </div>
+
+            <div class="div-box">
+                <h4>Цена покупки*</h4>
+                <input type="text" class="form-control" asp-for="BuyCost" />
+                <span asp-validation-for="BuyCost"></span>
+            </div>
+
             <button type="submit" class="btn btn-warning" style="width: 14rem;padding:
 1rem;margin-top: 2rem;margin-left: 38%;">
                 Отправить

@@ -11,6 +11,6 @@ namespace Invest.Domain.Entities
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public int Price { get; set; }
+        public double Price { get; set; }
     }
 }

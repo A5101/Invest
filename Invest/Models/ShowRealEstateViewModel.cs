@@ -9,9 +9,10 @@ namespace Invest.Models
         public List<string> Expenses { get; set; }
         public double TotalExpenses { get; set; }
         public string FullAddress { get; set; }
-        public int[] HistoryPrice { get; set; }
+        public double[] HistoryPrice { get; set; }
         public string[] HistoryDate { get; set; }
-        public int MinPrice { get; set; }
+        public double[] HistoryProfit { get; set; }
+        public double MinPrice { get; set; }
         public int PaybackPeriod { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace Invest.Domain.Entities
         public int NearPlaces { get; set; }
         [Required]
         public bool NearWorsth { get; set; }
-        [Required]
+
         public double Raiting { get; set; }
         [Required]
         public DateTime DateAdded { get; set; }
@@ -43,10 +43,11 @@ namespace Invest.Domain.Entities
         public string Expenses { get; set; }//Расходы
         [Required]
         public int Income { get; set; }//Доходы
-        [Required]
         public float Risks { get; set; }
-        [Required]
         public double Liquid { get; set; }
         public string? OwnerName { get; set; }
+        public DateTime BuildStartDate { get; set; }
+        public DateTime BuildEndDate { get; set; }
+        public int BuyCost { get; set; }
     }
 }

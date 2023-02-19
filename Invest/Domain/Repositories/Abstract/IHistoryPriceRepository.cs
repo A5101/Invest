@@ -2,8 +2,9 @@
 {
     public interface IHistoryPriceRepository
     {
-        public int[] GetHistoryPrice(Guid id);
+        public double[] GetHistoryPrice(Guid id);
         public string[] GetHistoryDate(Guid id);
-        public void AddHistory(Guid id, int price, DateTime date);
+        public void AddHistory(Guid id, double price, DateTime date);
+        public void Clear();
     }
 }

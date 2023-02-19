@@ -36,7 +36,7 @@ namespace Invest.Controllers
                 addr += "Этаж " + astate.Floor;
             }
 
-            if (astate.Number != "") addr +="Квартира " + astate.Number;
+            if (astate.Number != "") addr += "Квартира " + astate.Number;
 
 
             List<string> exp = astate.Expenses.Split(',').ToList();
@@ -52,7 +52,12 @@ namespace Invest.Controllers
             var ex = astate.Expenses.Split(',').ToList();
             var hp = dataManager.HistoryPrices.GetHistoryPrice(id);
             var hd = dataManager.HistoryPrices.GetHistoryDate(id);
-            var mp = dataManager.HistoryPrices.GetHistoryPrice(id).Min() - 100000;
+            var mp = 0;// = dataManager.HistoryPrices.GetHistoryPrice(id).Min();
+            var pp = dataManager.HistoryPrices.GetHistoryPrice(id).ToArray();
+            for (int i = 0; i < pp.Length; i++)
+            {
+                pp[i] -= astate.BuyCost;
+            }
             ShowRealEstateViewModel model = new()
             {
                 RealEstate = astate,
@@ -63,18 +68,19 @@ namespace Invest.Controllers
                 TotalExpenses = total,
                 HistoryPrice = hp,
                 HistoryDate = hd,
-                MinPrice = mp
+                MinPrice = mp,
+                HistoryProfit = pp
             };
             return View(model);
         }
 
         public IActionResult Edit(Guid id, string name)
         {
-            if (id == default) return View(new RealEstate() { OwnerName = name}); else return View(dataManager.RealAstates.GetRealEstateItemById(id));
+            if (id == default) return View(new RealEstate() { OwnerName = name }); else return View(dataManager.RealAstates.GetRealEstateItemById(id));
         }
 
         [HttpPost]
-        public IActionResult Edit(RealEstate astate, string name )
+        public IActionResult Edit(RealEstate astate, string name)
         {
             if (ModelState.IsValid)
             {
@@ -96,6 +102,8 @@ namespace Invest.Controllers
                 if (astate.Usage == "Коммерческое") R += 0.25;
                 if (astate.NearWorsth) R -= 5;
                 T = astate.Cost * astate.Area * R;
+
+
                 if (!astate.AreReady)
                 {
                     float proc = (float)(100 * T / astate.CostCadastr);
@@ -114,6 +122,25 @@ namespace Invest.Controllers
                         else astate.Risks += 3;
                     }
                 }
+
+                dataManager.HistoryPrices.Clear();
+                DateTime dt = new DateTime(astate.BuildStartDate.Year - 1, astate.BuildStartDate.Month, astate.BuildStartDate.Day);
+
+                int[] mul = new int[] { 0, 5, 13, 23, 40, 60, 85 };
+                //TimeSpan difDate = astate.BuildEndDate.Subtract(astate.BuildStartDate);
+                                                           //2023                  2020
+                int currState = (int)Math.Ceiling((astate.DateAdded - astate.BuildStartDate).TotalDays / 365);
+                for (int i = currState; i < Math.Ceiling((astate.BuildEndDate - astate.BuildStartDate).TotalDays / 365); i++)
+                {                                                   //2028
+                    astate.Risks /= (float)1.2;
+                    astate.Cost = Convert.ToInt32( astate.BuyCost * (1 + (double)mul[i] / 100.0));
+                    dataManager.HistoryPrices.AddHistory(astate.Id, astate.Cost, dt.AddYears(1));
+
+                    dt = dt.AddYears(1);
+                }
+
+
+
                 astate.Liquid += astate.NearPlaces * 0.02;
                 if (int.Parse(astate.Floor) > 16) astate.Liquid -= 0.3;
                 else if (int.Parse(astate.Floor) > 5) astate.Liquid += 0.05;
@@ -122,11 +149,15 @@ namespace Invest.Controllers
 
                 if (astate.Isrepaired) astate.Liquid += 0.1; else astate.Liquid -= 0.1;
 
+
+
                 if (astate.AreReady)
                 {
                     if (astate.Liquid < 0.2) astate.Risks += (float)1.5;
                     else if (astate.Liquid < 0.4) astate.Risks += 1;
                 }
+
+
 
                 List<string> exp = astate.Expenses.Split(',').ToList();
                 double total = 0;
@@ -144,10 +175,16 @@ namespace Invest.Controllers
 
                 astate.Raiting = astate.Cost * astate.Area * 5 / astate.Liquid / (total + astate.Cost * astate.Area);
 
+                for (int i = 0; i < 5; i++)
+                {
+                    astate.Cost = Convert.ToInt32(astate.Cost * (1 + astate.Raiting / 100.0));
+                    dataManager.HistoryPrices.AddHistory(astate.Id, astate.Cost, dt.AddYears(1));
+                    dt = dt.AddYears(1);
+                }
 
                 dataManager.RealAstates.SaveRealAstatesItem(astate);
-                dataManager.HistoryPrices.AddHistory(astate.Id, (int)astate.Area * astate.Cost, DateTime.UtcNow);
-                return base.RedirectToAction(nameof(Invest.Controllers.HomeController.Index), nameof(Invest.Controllers.HomeController).CutController());
+                //dataManager.HistoryPrices.AddHistory(astate.Id, (int)astate.Area * astate.Cost, DateTime.UtcNow);
+                return base.RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
             }
             return View(astate);
         }
