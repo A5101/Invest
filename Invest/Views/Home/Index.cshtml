@@ -51,44 +51,114 @@
         @*Коммерческие здания*@
         <div class="Commercial p-4" style="background: #8080801a; border-radius: 2ex;">
             <a href="#"><h2>Жилая недвижимость »</h2></a>
-            <div class="estatesItems">
+            <div class="estatesItems row">
                 @foreach (var kol in Model.estatesLiving)
                 {
-
-                    <a class="col-3" asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
-                        <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) c>
-                    </a>
-
+                    <div class="col-4">
+                        <div id="tekst_sverhu_kartinki" style="width: 380px; height: 230px;">
+                            <a asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
+                                <img class="img-fluid" src="@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image))" style="width: 100%; height: 100%;">
+                            </a>
+                            @if (@kol.RealEstate.Raiting < 4)
+                            {
+                                <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-danger text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                    <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @if (@kol.RealEstate.Raiting < 7)
+                                {
+                                    <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-warning text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                        <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-success text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                        <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
                 }
             </div>
-
-
         </div>
 
-        @*Жилые здания*@
-        <div class="Living p-4" style="background: #8080801a; border-radius: 2ex;">
-            <a href="#"> <h2>Коммерческая недвижимость »</h2></a>
-            <div class="estatesItems">
+
+        @*Коммерация*@
+        <div class="Commercial p-4" style="background: #8080801a; border-radius: 2ex;">
+            <a href="#"><h2>Коммерционная недвижимость »</h2></a>
+            <div class="estatesItems row">
                 @foreach (var kol in Model.estatesCommerce)
                 {
-                    <a class="col-3" asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
-                        <img class ="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image))>
-                    </a>
+                    <div class="col-4">
+                        <div id="tekst_sverhu_kartinki" style="width: 380px; height: 230px;">
+                            <a asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
+                                <img class="img-fluid" src="@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image))" style="width: 100%; height: 100%;">
+                            </a>
+                            @if (@kol.RealEstate.Raiting < 4)
+                            {
+                                <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-danger text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                    <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @if (@kol.RealEstate.Raiting < 7)
+                                {
+                                    <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-warning text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                        <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-success text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                        <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
                 }
             </div>
-
         </div>
 
-        @*Жилые здания*@
-        <div class="Land p-4" style="background: #8080801a; border-radius: 2ex;">
+        @*Участки*@
+        <div class="Commercial p-4" style="background: #8080801a; border-radius: 2ex;">
             <a href="#"><h2>Участки »</h2></a>
-            <div class="estatesItems">
+            <div class="estatesItems row">
                 @foreach (var kol in Model.estatesLand)
                 {
-
-                    <a class="col-3" asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
-                        <img class="col-3" src=@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image)) >
-                        </a>
+                    <div class="col-4">
+                        <div id="tekst_sverhu_kartinki" style="width: 380px; height: 230px;">
+                            <a asp-controller="RealEstate" asp-action="Show" asp-route-id="@kol.RealEstate.Id">
+                                <img class="img-fluid" src="@string.Concat("data:image/jpeg;base64,", Convert.ToBase64String(kol.Image._Image))" style="width: 100%; height: 100%;">
+                            </a>
+                            @if (@kol.RealEstate.Raiting < 4)
+                            {
+                                <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-danger text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                    <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @if (@kol.RealEstate.Raiting < 7)
+                                {
+                                    <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-warning text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                        <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="tekst_sverhu_kartinki_1 text-black p-2 border border-1 rounded bg-success text-white" style="padding-left: 0.8rem !important;padding-right: 0.9rem !important;border-radius: 2rem !important;padding-bottom: 0rem !important;">
+                                        <p style="font-size:2rem" class="h2">@kol.RealEstate.Raiting.ToString("0.0")</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
                 }
             </div>
         </div>
@@ -97,6 +167,16 @@
 </div>
 
 <style>
+
+    .numberCircle {
+        width: 60px;
+        line-height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 32px;
+        border: 2px solid #666;
+    }
+
     .col-3 {
         width: 30% !important;
         height: 230px !important;
@@ -134,5 +214,22 @@
 
         .RealState a:hover {
             color: blue;
+        }
+
+
+    div#tekst_sverhu_kartinki {
+        position: relative;
+    }
+
+    .tekst_sverhu_kartinki_1 {
+        position: absolute;
+        bottom: -10%;
+        left: 86%;
+        text-transform: uppercase;
+    }
+
+        .tekst_sverhu_kartinki_1 span {
+            font: bold 30px/44px Helvetica, Sans-Serif;
+            padding: 8px;
         }
 </style>
