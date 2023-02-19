@@ -65,7 +65,7 @@
 
                 @if (!@Model.RealEstate.AreReady)
                 {
-                    <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> Не в эксплуатации + ЭТАП СТРОИТЕЛЬСТВА </h2>
+                    <h2 style="margin-left:3px;margin-top:-1px;color:red !important;"> Не в эксплуатации + ЭТАП СТРОИТЕЛЬСТВА:@Math.Ceiling((DateTime.UtcNow - Model.RealEstate.BuildStartDate).TotalDays / 365) </h2>
                 }
                 else
                 {
